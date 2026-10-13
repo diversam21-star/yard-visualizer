@@ -1,0 +1,7 @@
+.env
+*.env
+rules.local.json
+data.json
+out/
+__pycache__/
+.DS_Store

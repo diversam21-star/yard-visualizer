@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>PathStudio · Yard Visualizer</title>
+<style>
+:root{--bg:#0d1322;--card:#151d31;--line:#2a3550;--gold:#e8c46a;--dim:#9aa6bf;--white:#eef2fa;--green:#6fd28a;--red:#ff7a6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+a{color:var(--gold)}header{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:12px 20px;border-bottom:1px solid var(--line);background:#0a0f1c;position:sticky;top:0;z-index:5}
+.brand{font-weight:800}.brand b{color:var(--gold)}.badge{font-size:.65rem;border:1px solid var(--gold);color:var(--gold);border-radius:5px;padding:2px 6px;margin-left:6px}
+header nav a{margin-right:12px;font-size:.85rem;text-decoration:none;color:var(--dim)}header nav a.on{color:var(--gold);font-weight:800}
+.verse{padding:10px 20px;color:var(--dim);font-size:.9rem;border-bottom:1px solid var(--line)}.verse b{color:var(--gold)}
+.wrap{display:grid;grid-template-columns:minmax(300px,460px) 1fr;gap:20px;padding:18px 20px;max-width:1500px;margin:auto}
+.stage{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:810/1440;background:#000}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s}
+.pin{position:absolute;transform:translate(-50%,-50%);border:2px solid #fff;background:rgba(232,196,106,.92);color:#10182c;font-weight:900;font-size:.72rem;border-radius:99px;padding:5px 10px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.5);z-index:3;white-space:nowrap}
+.pin.on{background:#fff}.wm{position:absolute;left:8px;bottom:8px;font-size:.62rem;letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.5);padding:3px 7px;border-radius:5px;z-index:3}
+.tools{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}button{all:unset;cursor:pointer;padding:7px 13px;border-radius:99px;border:1.5px solid var(--line);font-weight:700;font-size:.82rem}button:hover{border-color:var(--gold)}button.pri{background:var(--gold);color:#10182c;border-color:var(--gold)}
+h2{margin:0 0 6px;font-size:1.25rem}h3{margin:18px 0 8px;font-size:.78rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.cats button.on{border-color:var(--gold);color:var(--gold)}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.opt{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer}.opt.on{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,196,106,.25)}
+.opt .nm{font-weight:800}.opt.find{border-style:dashed}.fph{width:100%;height:120px;object-fit:cover;border-radius:9px;margin-bottom:6px;display:block}.fb{font-size:.62rem;font-weight:900;letter-spacing:.12em;background:#6fd28a;color:#10182c;border-radius:5px;padding:2px 6px}.opt .pr{font-size:1.1rem;font-weight:900;color:var(--gold);margin:4px 0}.opt .pr.na{color:var(--red);font-size:.85rem}
+.opt .ds{font-size:.82rem;color:var(--dim)}.opt .lk{font-size:.78rem;margin-top:6px;display:block}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-top:16px}.sum li{margin:3px 0}.sum .tot{font-weight:900;color:var(--gold)}
+.concepts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:0 20px 30px;max-width:1500px;margin:auto}
+.concept{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}.concept img{width:100%;aspect-ratio:810/1000;object-fit:cover;object-position:top;display:block}
+.concept .bd{padding:12px 14px}.concept .vs{font-size:.8rem;color:var(--gold);font-style:italic}.small{font-size:.78rem;color:var(--dim)}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.stage{max-width:460px;margin:auto}}
+</style></head><body>
+<header><div class="brand">&#10013; PathStudio <span style="color:var(--dim)">/</span> <b>Yard Visualizer</b><span class="badge">DEMO</span></div>
+<nav><a href="index.html">Live · Blueprint · Creative Studio</a><a class="on" href="visualizer.html">Visualizer</a></nav></header>
+<div class="verse"><b>Isaiah 58:11 (ESV)</b> &mdash; &ldquo;And the Lord will guide you continually and satisfy your desire in scorched places and make your bones strong; and you shall be like a watered garden, like a spring of water, whose waters do not fail.&rdquo; <a href="https://www.biblegateway.com/passage/?search=Isaiah+58%3A11&version=ESV" target="_blank" rel="noopener">Bible Gateway</a></div>
+<div class="wrap">
+ <div>
+  <div class="stage" id="stage"><img id="g" alt="Yard preview" src="assets/viz/ground-dirt.jpg"><div id="layers"></div><div id="pins"></div><div class="wm">CONCEPT PREVIEW · NOT TO SCALE</div></div>
+  <div class="tools"><button id="cmp">Hold to see today&rsquo;s yard</button><button id="clr">Clear all</button><button id="save" class="pri">Save this plan (JSON)</button></div>
+  <p class="small">Real photo from the Jul 25 walkthrough. Ground covers and items are real photos (product photos and photos of the actual plants) placed in at about true size; placement is approximate.</p>
+ </div>
+ <div>
+  <h2 id="ttl">Tap a gold pin on the photo</h2><p class="small" id="hint">Each pin opens choices for that spot. Pick one and the preview changes.</p>
+  <div class="cats" id="cats"></div>
+  <div class="opts" id="opts"></div>
+  <div class="sum" id="sum"></div>
+ </div>
+</div>
+<h2 style="padding:0 20px;max-width:1500px;margin:6px auto 10px">Full-yard concepts <span class="small">(tap one to load it into the preview)</span></h2>
+<div class="concepts" id="concepts"></div>
+<p class="small" style="padding:0 20px 30px;max-width:1500px;margin:auto">Photo sources: product photos from Vego Garden (raised bed), Backyard Discovery (Beaumont pergola) and NDS (drain grate); Wikimedia Commons photos: <a href="https://commons.wikimedia.org/wiki/File:Agave_americana_R01.jpg" target="_blank" rel="noopener">agave</a>: Marc Ryckaert (MJJR) (CC BY-SA 3.0) · <a href="https://commons.wikimedia.org/wiki/File:Variegated_Century_Plant_--_Agave_americana_%27Marginata%27.jpg" target="_blank" rel="noopener">agave2</a>: Jim Evans (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:The_delicate_Palo_Verde_tree._(5041827598).jpg" target="_blank" rel="noopener">paloverde</a>: Dorian Wallender from Lake Havasu City, Arizona, USA (CC BY-SA 2.0) · <a href="https://commons.wikimedia.org/wiki/File:Wooden_bench_in_Copped_Hall_Kitchen_Garden,_Epping,_Essex,_England.jpg" target="_blank" rel="noopener">bench</a>: Acabashi (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Gravel_Texture_(11902620963).jpg" target="_blank" rel="noopener">dg</a>: William Warby from London, England (CC BY 2.0) · <a href="https://commons.wikimedia.org/wiki/File:PEA_GRAVEL.jpg" target="_blank" rel="noopener">pea</a>: Ranjithkumar Murugesan (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Pebbles_(63814349).jpeg" target="_blank" rel="noopener">river</a>: Oliver Rolfe (CC BY 3.0) · <a href="https://commons.wikimedia.org/wiki/File:Pebbles_on_Kew_Beach,_Toronto_2005-10-11.jpg" target="_blank" rel="noopener">pebble</a>: Diego Torres Silvestre from Sao Paulo, Brazil (CC BY 2.0) · <a href="https://commons.wikimedia.org/wiki/File:Artificial_turf_yard_in_Sonoma,_California_-_Sarah_Stierch.jpg" target="_blank" rel="noopener">turf</a>: Missvain (CC BY 4.0). Concept previews, not to scale.</p>
+<script>
+const SEEN="Prices seen Oct 13, 2026 on the store page or its search listing. Stores change prices; check before buying.";
+const CAT={
+ ground:{label:"Ground cover",pin:"Ground",x:30,y:73,single:true,opts:[
+  {id:"dirt",name:"Bare dirt (today)",price:null,free:true,desc:"What is there now. Dust and mud with 4 dogs.",layer:"ground-dirt"},
+  {id:"dg",name:"Decomposed granite, brown",price:5.97,unit:"per 0.5 cu ft bag",desc:"Arizona-sourced. Packs firm for paths, cool underfoot vs. dark rock. About 4\u20136 sq ft per bag at 1 in.",url:"https://www.homedepot.com/p/Vigoro-0-5-cu-ft-10-in-to-25-in-Bagged-Decomposed-Granite-Brown-Decorative-Landscape-Rock-R1DCG14D/206197116",store:"Home Depot \u00b7 Vigoro",layer:"ground-dg"},
+  {id:"pea",name:"Pea gravel, tan",price:5.47,unit:"per 0.5 cu ft bag",desc:"Soft, rounded, good for play spots and drainage. About 2 sq ft per bag at 3 in.",url:"https://www.homedepot.com/p/Vigoro-0-5-cu-ft-Bagged-Pea-Gravel-Pebble-Landscape-Rock-54255/202523000",store:"Home Depot \u00b7 Vigoro",layer:"ground-pea"},
+  {id:"river",name:"River pebble",price:null,unit:"",desc:"Medium rounded stone. Holds up under dogs; harder to walk barefoot.",url:"https://www.homedepot.com/p/Vigoro-0-5-cu-ft-Bagged-River-Pebble-Landscape-Rock-54250V/100558618",store:"Home Depot \u00b7 Vigoro",layer:"ground-river"},
+  {id:"pebble",name:"Mexican beach pebble",price:14.97,unit:"per 0.5 cu ft bag (about 6 sq ft)",desc:"Dark, smooth, high-end look. Gets very hot in summer sun; best for accents.",url:"https://www.homedepot.com/p/Vigoro-0-5-cu-ft-Bagged-Mexican-Beach-Pebble-Landscape-Rock-470938/202035089",store:"Home Depot \u00b7 Vigoro",layer:"ground-pebble"},
+  {id:"turf",name:"Pet-friendly artificial turf",price:null,unit:"",desc:"Green play field for the kids. Needs a compacted base, infill and a rinse plan for pets. Gets hot in summer.",url:null,store:"Get a local installed quote",layer:"ground-turf"}]},
+ grate:{label:"Drain grates",pin:"Ponding by walk",x:80,y:58,opts:[
+  {id:"none",name:"No drain",free:true,desc:"Water keeps ponding along the walk after storms."},
+  {id:"square",name:"6 in. square drain grates (x2)",price:18.68,unit:"each, grate + adapter",desc:"Catch basins at the low spots; pipe to daylight.",url:"https://www.homedepot.com/p/NDS-6-in-Plastic-Square-Drainage-Grate-with-Adapter-in-Black-640/100377389",store:"Home Depot \u00b7 NDS",layer:"item-grate-square"},
+  {id:"channel",name:"Channel drain along the walk",price:49.97,unit:"per 40 in. kit (3 in. plastic grate)",desc:"Slot drain at the walk edge; several kits run end to end.",url:"https://www.homedepot.com/p/NDS-Pro-Series-3-in-x-40-in-Plastic-Channel-Drain-Kit-with-Grate-764/203787428",store:"Home Depot \u00b7 NDS",layer:"item-grate-channel"}]},
+ plant:{label:"Plants",pin:"Planting bed",x:14,y:44,opts:[
+  {id:"none",name:"No new plants",free:true,desc:""},
+  {id:"yucca",name:"Red yucca (x3)",price:16.47,unit:"each, 1 gal",desc:"Coral flower spikes, hummingbirds, very low water. Soft, spineless leaves.",url:"https://www.homedepot.com/p/SMART-PLANET-Red-Yucca-Live-Succulent-Shrub-Hesperaloe-Parviflora-Drought-Tolerant-Landscape-Plant-1-Gal-Grower-Pot-Easy-Care-0880068/316300392",store:"Home Depot",layer:null},
+  {id:"sage",name:"Texas sage (x3)",price:26.98,unit:"each, 3 gal",desc:"Silver leaves, purple blooms after monsoon rain. Handles Peoria heat.",url:"https://www.homedepot.com/p/3-Gal-Texas-Sage-Flowering-Shrub-with-Pink-Bloom-700357/317909192",store:"Home Depot \u00b7 Altman Plants",layer:null},
+  {id:"agave",name:"Variegated agave americana (x2)",price:24.98,unit:"each, 8 in. pot",desc:"Bold desert shape. Sharp tips: keep away from play areas and dogs.",url:"https://www.homedepot.com/p/8-in-SPH-Agave-Americana-Variegated-Plant-in-Pot-1006125999/324135477",store:"Home Depot",layer:"item-plant-agave2"},
+  {id:"marigold",name:"Desert marigold (x3)",price:null,unit:"",desc:"Native yellow wildflower, blooms most of the year. Check a Valley nursery.",url:null,store:"Local nursery",layer:null},
+  {id:"paloverde",name:"Desert Museum palo verde tree",price:107.80,unit:"15 gal",desc:"Thornless, fast shade, yellow spring bloom. Plant 10+ ft from walls.",url:"https://threetimbersshop.com/products/desert-museum",store:"Three Timbers (Phoenix)",layer:"item-plant-paloverde"}]},
+ struct:{label:"Structures",pin:"Statue & open yard",x:44,y:30,opts:[
+  {id:"none",name:"Nothing new",free:true,desc:""},
+  {id:"bench",name:"Prayer bench by the statue",price:323.12,unit:"4 ft teak bench",desc:"A quiet seat for morning prayer and Scripture. (Cross shown is a small add-on plaque.)",url:"https://www.homedepot.com/p/Cambridge-Casual-Cambridge-Casual-4-ft-Maine-Weathered-Gray-Teak-Wood-Outdoor-Bench-140790-TW-WT-XX-XX/318441614",store:"Home Depot \u00b7 Cambridge Casual",layer:"item-struct-bench"},
+  {id:"pergola",name:"Cedar pergola 10x12",price:1199,unit:"kit, sale price (reg. $1,499)",desc:"Shade for family table and hangouts. Add shade cloth for summer. Check Peoria permits before posts.",url:"https://www.backyarddiscovery.com/products/cedar-pergola",store:"Backyard Discovery \u00b7 Beaumont",layer:"item-struct-pergola"},
+  {id:"bed",name:"Metal raised garden bed",price:179.95,unit:"17 in. tall 9-in-1 kit",desc:"Grow food with the kids. Soil and drip line are extra.",url:"https://www.homedepot.com/p/vego-garden-17-in-Tall-9-In-1-Modular-Olive-Green-Metal-Raised-Garden-Bed-Kit-VB9N117G/318709633",store:"Home Depot \u00b7 Vego Garden",layer:"item-struct-raisedbed"},
+  {id:"fountain",name:"Water basin around the statue",price:null,unit:"",desc:"Shallow recirculating basin; needs a GFCI outlet and a cover for little ones.",url:null,store:"Local quote",layer:null}]}
+};
+const FINDS={};
+CAT.pavers={label:"Bricks & pavers",pin:"Patio / pavers",x:62,y:80,ground:true,opts:[{id:"none",name:"No pavers",free:true,desc:""}]};
+CAT.playset={label:"Playset",pin:"Playset",x:72,y:24,opts:[{id:"none",name:"No playset",free:true,desc:""}]};
+CAT.trampoline={label:"Trampoline",pin:"Trampoline",x:55,y:40,opts:[{id:"none",name:"No trampoline",free:true,desc:""}]};
+for(const g in FINDS){if(CAT[g])CAT[g].opts.push(...FINDS[g]);}
+const CONCEPTS=[
+ {id:"concept-1",name:"Garden of Prayer",verse:"\u201cBe still, and know that I am God.\u201d Psalm 46:10",vurl:"https://www.biblegateway.com/passage/?search=Psalm+46%3A10&version=ESV",desc:"Firm granite ground, a teak prayer bench beside the statue, agave along the back edge, a palo verde for shade and a raised bed for the family harvest. A channel drain ends the ponding by the walk.",pick:{ground:"dg",grate:"channel",plant:"agave",struct:"bench"},extra:["paloverde","bed"]},
+ {id:"concept-2",name:"Shade & Living Water",verse:"\u201cwhoever drinks of the water that I will give him will never be thirsty again\u201d John 4:14",vurl:"https://www.biblegateway.com/passage/?search=John+4%3A14&version=ESV",desc:"River pebble ground, a cedar pergola over the statue for family gatherings, agave accents and square drains at the low spots. (A water basin around the statue is a later add once it is quoted.)",pick:{ground:"river",grate:"square",plant:"agave",struct:"pergola"},extra:[]},
+ {id:"concept-3",name:"Family Field",verse:"\u201cBehold, children are a heritage from the Lord\u201d Psalm 127:3",vurl:"https://www.biblegateway.com/passage/?search=Psalm+127%3A3&version=ESV",desc:"An open green play field for the kids and dogs, agave kept to the back edge away from play, and a bench to watch them play.",pick:{ground:"turf",grate:"channel",plant:"agave",struct:"bench"},extra:[]}
+];
+const ST={ground:"dirt",grate:"none",plant:"none",struct:"none",pavers:"none",playset:"none",trampoline:"none",extra:[]};let cur="ground";
+const $=id=>document.getElementById(id),esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const find=id=>{for(const k in CAT)for(const o of CAT[k].opts)if(o.id===id)return o;};
+const money=n=>"$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+try{Object.assign(ST,JSON.parse(localStorage.getItem("yardviz")||"{}"));}catch(e){}
+function render(){
+  const g=CAT.ground.opts.find(o=>o.id===ST.ground)||CAT.ground.opts[0];const pv=CAT.pavers.opts.find(o=>o.id===ST.pavers);$("g").src="assets/viz/"+((pv&&pv.layer)||g.layer||"ground-dirt")+".jpg";
+  const ls=[];["grate","plant","struct","playset","trampoline"].forEach(k=>{const o=CAT[k].opts.find(o=>o.id===ST[k]);if(o&&o.layer)ls.push(o.layer);});
+  (ST.extra||[]).forEach(id=>{const o=find(id);if(o&&o.layer&&!ls.includes(o.layer))ls.push(o.layer);});
+  $("layers").innerHTML=ls.map(l=>'<img alt="" src="assets/viz/'+l+'.png">').join("");
+  $("pins").innerHTML=Object.entries(CAT).map(([k,c])=>'<div class="pin'+(k===cur?' on':'')+'" style="left:'+c.x+'%;top:'+c.y+'%" data-k="'+k+'">'+esc(c.pin)+'</div>').join("");
+  document.querySelectorAll(".pin").forEach(p=>p.onclick=()=>{cur=p.dataset.k;render();});
+  $("cats").innerHTML=Object.entries(CAT).map(([k,c])=>'<button class="'+(k===cur?'on':'')+'" data-k="'+k+'">'+esc(c.label)+'</button>').join("");
+  document.querySelectorAll("#cats button").forEach(b=>b.onclick=()=>{cur=b.dataset.k;render();});
+  const c=CAT[cur];$("ttl").textContent=c.label;
+  $("opts").innerHTML=c.opts.map(o=>'<div class="opt'+(ST[cur]===o.id?' on':'')+(o.find?' find':'')+'" data-id="'+o.id+'">'+(o.find?(o.photo?'<img class="fph" alt="" src="'+esc(o.photo)+'">':'')+'<span class="fb">LOCAL FIND</span> <span class="small">'+esc(o.city)+' \u00b7 '+esc(o.dist)+'</span>':'')+'<div class="nm">'+esc(o.name)+'</div>'+
+    (o.free?'':(o.price===0&&o.find?'<div class="pr">FREE</div>':o.price!=null?'<div class="pr">'+money(o.price)+' <span class="small">'+esc(o.unit)+'</span></div>':'<div class="pr na">Price not found &mdash; check locally</div>'))+
+    '<div class="ds">'+esc(o.desc)+(o.find&&o.note?'<br><i>'+esc(o.note)+'</i>':'')+(o.find?'<br>Seen '+esc(o.seen)+'. Check the listing is still up before driving.':'')+'</div>'+(!o.free&&!o.layer?'<div class="small" style="color:var(--gold)">No in-place photo yet (no clean real photo to place)</div>':'')+(o.url?'<a class="lk" href="'+esc(o.url)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+esc(o.store)+' &rarr;</a>':(o.store&&!o.free?'<span class="lk small">'+esc(o.store)+'</span>':''))+'</div>').join("");
+  document.querySelectorAll(".opt").forEach(d=>d.onclick=()=>{ST[cur]=d.dataset.id;ST.extra=[];save();render();});
+  const items=[];["ground","grate","plant","struct","pavers","playset","trampoline"].forEach(k=>{const o=CAT[k].opts.find(o=>o.id===ST[k]);if(o&&!o.free)items.push(o);});(ST.extra||[]).forEach(id=>{const o=find(id);if(o&&!items.includes(o))items.push(o);});
+  const known=items.filter(o=>o.price!=null),unk=items.filter(o=>o.price==null);
+  $("sum").innerHTML='<b>Your picks</b>'+(items.length?'<ul>'+items.map(o=>'<li>'+esc(o.name)+' &mdash; '+(o.price!=null?money(o.price)+' '+esc(o.unit):'<span style="color:var(--red)">price not found</span>')+'</li>').join("")+'</ul>':'<p class="small">Nothing picked yet.</p>')+
+   (known.length?'<div class="tot">Starting prices listed: '+money(known.reduce((a,o)=>a+o.price,0))+'</div><p class="small">One unit of each item only. Bags of rock, extra plants, soil, delivery, tax and labor are not included'+(unk.length?'; '+unk.length+' item(s) still need a price':'')+'. '+SEEN+'</p>':'');
+}
+function save(){localStorage.setItem("yardviz",JSON.stringify(ST));}
+$("clr").onclick=()=>{Object.assign(ST,{ground:"dirt",grate:"none",plant:"none",struct:"none",extra:[]});save();render();};
+const cmp=$("cmp");let held=null;cmp.onmousedown=cmp.ontouchstart=()=>{held=$("g").src;$("g").src="assets/viz/ground-dirt.jpg";$("layers").style.opacity=0;};
+cmp.onmouseup=cmp.onmouseleave=cmp.ontouchend=()=>{if(held){$("g").src=held;held=null;$("layers").style.opacity=1;}};
+$("save").onclick=()=>{const b=new Blob([JSON.stringify({saved:new Date().toISOString(),plan:ST},null,1)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="yard-plan.json";a.click();};
+$("concepts").innerHTML=CONCEPTS.map(c=>{const ids=[...Object.values(c.pick),...c.extra];const its=ids.map(find).filter(o=>o&&!o.free);const t=its.filter(o=>o.price!=null).reduce((a,o)=>a+o.price,0),u=its.filter(o=>o.price==null).length;
+  return '<div class="concept" data-id="'+c.id+'"><img alt="'+esc(c.name)+'" src="assets/viz/'+c.id+'.jpg"><div class="bd"><b>'+esc(c.name)+'</b><div class="vs"><a href="'+c.vurl+'" target="_blank" rel="noopener">'+esc(c.verse)+' (ESV)</a></div><p class="small">'+esc(c.desc)+'</p><div class="small">Starting prices: <b style="color:var(--gold)">'+money(t)+'</b>'+(u?' + '+u+' item(s) without a price':'')+'</div><button style="margin-top:8px">Load into preview</button></div></div>';}).join("");
+document.querySelectorAll(".concept").forEach(d=>d.querySelector("button").onclick=()=>{const c=CONCEPTS.find(x=>x.id===d.dataset.id);Object.assign(ST,c.pick);ST.extra=c.extra.slice();save();render();window.scrollTo({top:0,behavior:"smooth"});});
+{const h=location.hash.slice(1),c=CONCEPTS.find(x=>x.id===h);if(c){Object.assign(ST,c.pick);ST.extra=c.extra.slice();}else if(CAT[h])cur=h;}
+render();
+</script></body></html>

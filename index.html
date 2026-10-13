@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>PathStudio · Yard (private)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">&#9670;</span> PathStudio <span class="sep">/</span> <b>Yard</b> <span class="badge">PRIVATE</span></div>
+  <nav class="tabs" role="tablist" aria-label="Modes">
+    <button class="tab on" data-tab="live" role="tab" title="Real photos, pan and zoom">LIVE</button>
+    <button class="tab" data-tab="blueprint" role="tab" title="Top-down A/B/C plans">BLUEPRINT</button>
+    <button class="tab" data-tab="creative" role="tab" title="Tap hotspots to upgrade">CREATIVE STUDIO</button>
+    <a class="tab" href="visualizer.html" title="See options in place on the photo" style="text-decoration:none;color:#e8c46a">VISUALIZER &rarr;</a>
+  </nav>
+  <div class="status" id="status" aria-live="polite">Offline · local only</div>
+</header>
+
+<div class="disc">
+  <span class="wm-inline">CONCEPT ART — NOT TO SCALE</span>
+  Real frames from the Jul 25, 2026 walkthrough (no people). Overlays are concept art. Costs are <b>estimates, not quotes</b>.
+  Peoria AZ · summer extreme heat; nicer weather now for hangouts. Private residence.
+</div>
+
+<div class="squad" id="squad" title="Emoji placeholders only, no photos"></div>
+
+<main>
+<!-- LIVE -->
+<section id="tab-live" class="pane on">
+  <div class="areas" id="areasLive"></div>
+  <div class="grid">
+    <div class="viewer">
+      <div class="vbar">
+        <div class="vtitle"><b id="vAreaLive"></b> <span id="vCapLive" class="mut"></span></div>
+        <div class="vtools">
+          <button type="button" data-z="in" data-viewer="live" title="Zoom in">+</button>
+          <button type="button" data-z="out" data-viewer="live" title="Zoom out">&minus;</button>
+          <button type="button" data-z="fit" data-viewer="live" title="Fit">Fit</button>
+          <button type="button" data-z="reset" data-viewer="live" title="Reset">Reset</button>
+          <span class="mut small" id="zLabelLive">100%</span>
+        </div>
+      </div>
+      <div class="stage" id="stageLive">
+        <div class="bgb" id="bgbLive"></div>
+        <div class="world" id="worldLive">
+          <img id="photoLive" alt="" draggable="false">
+        </div>
+        <div class="wm">CONCEPT ART — LIVE PHOTOS</div>
+        <div class="hint">Scroll / pinch to zoom · drag to pan · real photos only</div>
+      </div>
+      <div class="thumbs" id="thumbsLive"></div>
+    </div>
+    <aside class="side">
+      <h2 id="aNameLive"></h2>
+      <p class="heat" id="heatTip">Peoria AZ: summer is extreme; plan shade now while weather is nice for hangouts.</p>
+      <h3>Seen in the video</h3>
+      <ul id="aSeenLive" class="plain"></ul>
+      <h3>Why this area matters</h3>
+      <ul id="aUpLive" class="plain"></ul>
+      <p class="mut small">Switch to <b>CREATIVE STUDIO</b> to tap hotspots and try upgrades on this photo.</p>
+      <button type="button" class="pri" id="toCreative">Open in Creative Studio →</button>
+      <p><a href="visualizer.html" style="color:#e8c46a;font-weight:700">Open the Yard Visualizer (see ground, plants and structures in place) →</a></p>
+    </aside>
+  </div>
+</section>
+
+<!-- BLUEPRINT -->
+<section id="tab-blueprint" class="pane">
+  <div class="mapbar">
+    <div class="seg" id="mapSeg"></div>
+    <span class="mut small" id="mapTitle"></span>
+    <span class="mut small">Click a numbered area → jumps to LIVE photos. Plan is an estimate, not a survey.</span>
+  </div>
+  <div class="mapwrap"><div class="map" id="map"><img id="mapImg" alt="Blueprint top-down plan" draggable="false"></div></div>
+</section>
+
+<!-- CREATIVE STUDIO -->
+<section id="tab-creative" class="pane">
+  <div class="areas" id="areasCreative"></div>
+  <div class="grid creative-grid">
+    <div class="viewer">
+      <div class="vbar">
+        <div class="vtitle"><b id="vAreaCre"></b> <span id="vCapCre" class="mut"></span></div>
+        <div class="vtools">
+          <button type="button" data-z="in" data-viewer="cre" title="Zoom in">+</button>
+          <button type="button" data-z="out" data-viewer="cre" title="Zoom out">&minus;</button>
+          <button type="button" data-z="fit" data-viewer="cre" title="Fit">Fit</button>
+          <button type="button" data-z="reset" data-viewer="cre" title="Reset">Reset</button>
+          <span class="mut small" id="zLabelCre">100%</span>
+        </div>
+      </div>
+      <div class="stage" id="stageCre">
+        <div class="bgb" id="bgbCre"></div>
+        <div class="world" id="worldCre">
+          <img id="photoCre" alt="" draggable="false">
+          <svg id="ov" viewBox="0 0 810 1440" xmlns="http://www.w3.org/2000/svg"></svg>
+          <div id="pins" class="pins"></div>
+        </div>
+        <div class="wm">CONCEPT ART — NOT TO SCALE</div>
+        <div class="hint">Tap a hotspot pin to upgrade · drag overlays · scroll to zoom</div>
+      </div>
+      <div class="thumbs" id="thumbsCre"></div>
+    </div>
+    <aside class="side" id="creSide">
+      <h2 id="aNameCre"></h2>
+      <div id="spotPanel" class="spot-panel" hidden>
+        <h3 id="spotTitle">Hotspot</h3>
+        <p class="mut small" id="spotHint">Pick an upgrade. Variants show estimated costs.</p>
+        <div id="spotOpts" class="opts"></div>
+        <div id="variantBox" class="variant-box" hidden>
+          <label class="row"><span id="varName"></span><b id="varCost" class="tag">ESTIMATE</b></label>
+          <div id="varList" class="var-list"></div>
+          <p class="mut small" id="varNote"></p>
+          <div id="varPlants" class="plants" hidden></div>
+          <div class="row2">
+            <button type="button" class="pri" id="varApply">Apply on photo</button>
+            <button type="button" id="varOff">Remove</button>
+          </div>
+        </div>
+      </div>
+      <div id="selBox" class="sel" hidden>
+        <label class="row"><span id="selName"></span><b id="selVal"></b></label>
+        <input type="range" id="selSize" min="30" max="250" value="100">
+        <div class="row2"><button type="button" id="selReset">Reset position</button><button type="button" id="selOff">Remove</button></div>
+        <p class="mut small" id="selNote"></p>
+      </div>
+      <label class="row small mut">Overlay opacity <input type="range" id="opacity" min="20" max="100" value="100"></label>
+      <h3>Active upgrades on this photo</h3>
+      <div class="opts" id="opts"></div>
+      <h3>Upgrade ideas for this area</h3>
+      <ul id="aUpCre" class="plain"></ul>
+      <h3>Phase cost ranges <span class="tag">ESTIMATES</span></h3>
+      <table class="cost" id="costTbl"></table>
+    </aside>
+  </div>
+
+  <!-- Ground cover -->
+  <div class="card ground-card">
+    <h2>Ground cover comparison <span class="tag">4 DOGS · DIRT / POOP</span></h2>
+    <p class="mut small" id="groundNote"></p>
+    <div class="ground-controls">
+      <label>Main yard area (sq ft)
+        <input type="number" id="groundSqFt" min="200" max="8000" step="50" value="2200">
+      </label>
+      <span class="mut small">~42 ft deep backyard notes · adjust to taste · estimate only</span>
+    </div>
+    <div class="table-wrap">
+      <table class="ground" id="groundTbl"></table>
+    </div>
+    <div class="ground-pick">
+      <h3>Your pick for the main yard</h3>
+      <div class="seg" id="groundSeg"></div>
+      <div id="groundTotal" class="ground-total"></div>
+    </div>
+  </div>
+
+  <!-- Layout / export -->
+  <div class="lay">
+    <div class="card">
+      <h2>Your choices</h2>
+      <p class="mut small">Saved in this browser (localStorage). Export JSON to keep a copy. Private — not on daily-push.</p>
+      <div class="btns">
+        <button type="button" id="bSave" class="pri">Save now</button>
+        <button type="button" id="bExport">Export JSON</button>
+        <button type="button" id="bCopy">Copy JSON</button>
+        <button type="button" id="bImport">Import JSON</button>
+        <button type="button" id="bClear" class="danger">Clear all</button>
+        <input type="file" id="fImport" accept="application/json,.json" hidden>
+      </div>
+      <div id="summary"></div>
+    </div>
+    <div class="card">
+      <h2>Rough total <span class="tag">ESTIMATE</span></h2>
+      <div id="tally"></div>
+      <p class="mut small">Adds each needed phase once + ground cover total. Concept only, not a quote. Permits/electrician not fully included.</p>
+    </div>
+    <div class="card wide">
+      <h2>JSON preview</h2>
+      <pre id="jsonPre"></pre>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  Yard Visualizer · concept art not to scale · estimates not quotes · emoji Squad only (no family photos)
+</footer>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
